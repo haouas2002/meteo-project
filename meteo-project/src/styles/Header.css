@@ -1,0 +1,37 @@
+#header{
+    color: white;
+    display: flex;
+    gap: 20%;
+}
+#title{
+    display: flex;
+    gap: 10px;
+}
+ul{
+    display: flex;
+    gap: 30px;
+}
+li{
+    list-style: none;
+    font-size:30px ;
+    font-weight: lighter;
+}
+a{
+    color: white;
+    text-decoration:none ;
+}
+a:hover{
+    font-weight: bold;
+    text-decoration: underline #695D5D;
+}
+h1{
+    font-size: 69px;
+    color: white;
+    margin-bottom: 0;
+   margin-top: 0;
+   font-weight: 400;
+}
+#imgtitle{
+    width: 67px;
+    height: 48px;
+}

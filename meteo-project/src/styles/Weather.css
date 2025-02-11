@@ -1,0 +1,130 @@
+#one{
+    margin: 0 auto;
+    width: 817px;
+    padding-left: 20px;
+    background: linear-gradient(120deg, #AD36CB 27%, #333333 69%);
+    color: white;
+    border-radius:35px;
+    box-shadow: 10px 5px 5px #333333;
+
+}
+.two{
+    display: flex;
+    gap: 20px;
+    height: 130px;
+    justify-content: center;
+    font-size: 70px;
+    margin-top: 0px;
+    font-weight: lighter;
+}
+.twoo{
+    display: flex;
+    justify-content: space-around;
+}
+.search{
+    width: 66px;
+    height: 66px;
+    
+}
+#search-bar{
+    display: flex ;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+#a{
+    width: 711px;
+    height: 66px;
+    border-radius: 25px;
+    font-size: 30px;
+    padding-left: 20px;
+    background-color: #D9D9D9;
+    border: 1px solid #D9D9D9;
+    font-weight: lighter;
+    margin-top: 0;
+    box-shadow: 5px 5px 5px black;
+}
+#location{
+    width: 31px ;
+    height: 31px ;
+    margin-top: 30px;
+}
+#loc{
+    display: flex;
+    gap: 12px;
+    font-size: 30px;
+    margin: 0;
+    padding: 0;
+    height: 50px;
+    font-weight: lighter;
+}
+#temp{
+    width: 19px;
+    height: 62px;
+    margin-top: 80px;
+    
+}
+#temp-img{
+    width: 96px;
+    height: 96px;
+    margin-top: 60px;
+}
+#date{
+    font-size: 20px;
+    margin-top: 0;
+    padding-top: 0;
+    font-weight: 500 ;
+}
+#b{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 0;
+}
+.twoone{
+    display: flex;
+    padding: 0;
+    flex-direction: column;
+    gap: 0;
+    text-align: center;
+}
+.too{
+    margin-bottom: 0;
+    font-size: 20px;
+    font-weight: 500;
+}
+.tooo{
+    margin-top: 0;
+    font-size: 22px;
+    font-weight: 500;
+}
+#z{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 25px;
+    
+}
+.petit{
+    width:121px ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    background:linear-gradient(120deg,#B32DD4 27%,#373333 80%) ;
+    border-radius: 25px;
+    padding: 2px;
+    box-shadow: 5px 2px 2px #373333;
+}
+.time{
+    font-size: 17px;
+    margin:0;
+}
+.weather-icon{
+    height: 50px;
+    width: 57px;
+    margin: 0;
+}
+.tps{
+    margin-top: 0;
+    margin-bottom: 0;
+}
