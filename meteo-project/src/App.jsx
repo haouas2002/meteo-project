@@ -1,5 +1,6 @@
 import Weather from "./components/Weather";
 import Header from "./components/Heading"
+import Footer from "./components/Footer"
 import "./styles/App.css"
 function App() {
   
@@ -8,6 +9,7 @@ function App() {
    <div>                                    
     <Header />
     <Weather />
+    <Footer />
    </div>
   );
 }

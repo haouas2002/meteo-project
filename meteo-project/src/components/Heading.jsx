@@ -10,8 +10,8 @@ function Heading(){
             <nav id="navbar">
                 <ul>
                     <li><a href="#frist">Today</a></li>
-                    <li> <a href="">Tommorow</a></li>
-                    <li> <a href="">Monthly Forecast</a></li>
+                    <li> <a href="#un">Tommorow</a></li>
+                    
                 </ul>
             </nav>
         </div>

@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import clear_sky from "../assets/images/clearSky.png";
 import few_clouds from "../assets/images/fewClouds.png";
 import scattered_clouds from "../assets/images/scatteredClouds.png";
@@ -79,6 +79,7 @@ function Weather() {
       const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${import.meta.env.VITE_WEATHER_ID}`;
       const response = await fetch(url);
       const data = await response.json();
+      console.log(data)
 
       if (!response.ok) {
         alert(data.message);
@@ -86,9 +87,12 @@ function Weather() {
       }
 
       const forecastData = {};
-      for (let i = 0; i < 6; i++) {
+      for (let i = 0; i < 39; i++) {
         forecastData[`time${i}`] = new Date(data.list[i].dt * 1000).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false  });
         forecastData[`temperature${i}`] = Math.floor(data.list[i].main.temp);
+        forecastData[`humidity${i}`] = data.list[i].main.humidity;
+        forecastData[`visibility${i}`] = data.list[i].visibility;
+        forecastData[`windSpeed${i}`] = data.list[i].wind.speed;
         forecastData[`icon${i}`] = allIcons[data.list[i].weather[0].icon];
       }
       setForecast(forecastData);
@@ -102,6 +106,11 @@ function Weather() {
   const today = new Date();
   const options = { weekday: "short", month: "short", day: "numeric" };
   const formattedDate = today.toLocaleDateString("en-US", options);
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1); 
+  const formattedTomorrow = tomorrow.toLocaleDateString("en-US", options);
+  
+  
 
   return (
     <div id="frist">
@@ -138,13 +147,13 @@ function Weather() {
                 <p className="tooo">{weatherData.visibility}</p>
               </div>
             </div>
-            </>
+          </>
         )}
       </div>
       <div>
         {forecast && (
         <div id="z">
-         {[0, 1, 2, 3, 4, 5].map((i) => (
+         {[0, 1, 2, 3, 4, 5, 6].map((i) => (
           <div className="petit" key={i}>
               <p className="time">{forecast[`time${i}`]}</p>
               <img src={forecast[`icon${i}`]} alt="weather icon" className="weather-icon" />
@@ -154,6 +163,52 @@ function Weather() {
            </div>
          )}
       </div>
+      <div id="un">
+        {forecast && (
+          <>
+            <div id="loc">
+              <p>{weatherData.location} </p>
+              <img src={location} id="location" />
+            </div>
+            <div id="b">
+              <div className="two">
+                <img src={temp} alt="" id="temp" />
+                <p>{forecast[`temperature${13}`]}°C</p>
+                <img src={weatherData.icon} alt="" id="temp-img" />
+              </div>
+              <p id="date">{formattedTomorrow}</p>
+            </div>
+            <div className="twoo">
+              <div className="twoone">
+                <p className="too">HUMIDITY</p>
+                <p className="tooo">{forecast[`humidity${13}`]}% </p>
+              </div>
+              <div className="twoone">
+                <p className="too">WIND SPEED</p>
+                <p className="tooo">{forecast[`windSpeed${13}`]}mph</p>
+              </div>
+              <div className="twoone">
+                <p className="too">VISIBILITY</p>
+                <p className="tooo">{forecast[`visibility${13}`]}</p>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+      <div>
+        {forecast && (
+        <div id="z">
+         {[13, 14, 15, 16, 17, 18, 19].map((i) => (
+          <div className="petit" key={i}>
+              <p className="time">{forecast[`time${i}`]}</p>
+              <img src={forecast[`icon${i}`]} alt="weather icon" className="weather-icon" />
+              <p className="tps">{forecast[`temperature${i}`]}°C</p>
+              </div>
+              ))}
+           </div>
+         )}
+      </div>
+      
     </div>
   );
 }
