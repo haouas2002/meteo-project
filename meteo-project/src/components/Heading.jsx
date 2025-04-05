@@ -9,8 +9,8 @@ function Heading(){
             </div>
             <nav id="navbar">
                 <ul>
-                    <li><a href="#frist">Today</a></li>
-                    <li> <a href="#un">Tommorow</a></li>
+                    <li><a href="#current-weather">Today</a></li>
+                    <li> <a href="#tomorrow-weather">Tommorow</a></li>
                     
                 </ul>
             </nav>

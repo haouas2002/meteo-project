@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import clear_sky from "../assets/images/clearSky.png";
 import few_clouds from "../assets/images/fewClouds.png";
 import scattered_clouds from "../assets/images/scatteredClouds.png";
@@ -19,7 +19,7 @@ function Weather() {
   const [forecast, setForecast] = useState(null);
   const [error, setError] = useState(null);
 
-  const allIcons = {
+  const weatherIcons = {
     "01d": clear_sky,
     "01n": clear_sky,
     "02d": few_clouds,
@@ -53,7 +53,7 @@ function Weather() {
         alert(data.message);
         return;
       }
-      const icon = allIcons[data.weather[0].icon];
+      const icon = weatherIcons[data.weather[0].icon];
       setWeatherData({
         humidity: data.main.humidity,
         windSpeed: data.wind.speed,
@@ -62,14 +62,14 @@ function Weather() {
         location: data.name,
         icon: icon,
       });
-      search_after(city);
+      searchForecast(city);
     } catch (error) {
       setWeatherData(false);
       console.error(error.message);
     }
   };
 
-  const search_after = async (city) => {
+  const searchForecast = async (city) => {
     if (!city) {
       alert("Enter city name");
       return;
@@ -79,7 +79,6 @@ function Weather() {
       const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${import.meta.env.VITE_WEATHER_ID}`;
       const response = await fetch(url);
       const data = await response.json();
-      console.log(data)
 
       if (!response.ok) {
         alert(data.message);
@@ -88,12 +87,12 @@ function Weather() {
 
       const forecastData = {};
       for (let i = 0; i < 39; i++) {
-        forecastData[`time${i}`] = new Date(data.list[i].dt * 1000).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false  });
+        forecastData[`time${i}`] = new Date(data.list[i].dt * 1000).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false });
         forecastData[`temperature${i}`] = Math.floor(data.list[i].main.temp);
         forecastData[`humidity${i}`] = data.list[i].main.humidity;
         forecastData[`visibility${i}`] = data.list[i].visibility;
         forecastData[`windSpeed${i}`] = data.list[i].wind.speed;
-        forecastData[`icon${i}`] = allIcons[data.list[i].weather[0].icon];
+        forecastData[`icon${i}`] = weatherIcons[data.list[i].weather[0].icon];
       }
       setForecast(forecastData);
     } catch (error) {
@@ -109,107 +108,119 @@ function Weather() {
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1); 
   const formattedTomorrow = tomorrow.toLocaleDateString("en-US", options);
-  
-  
 
   return (
-    <div id="frist">
-      <div id="search-bar">
-        <input type="text" placeholder="Search location..." ref={inputRef} id="a" />
-        <img src={Search} onClick={() => search(inputRef.current.value)} className="search" />
-      </div>
-      <div id="one">
-        {weatherData && (
-          <>
-            <div id="loc">
-              <p>{weatherData.location} </p>
-              <img src={location} id="location" />
-            </div>
-            <div id="b">
-              <div className="two">
-                <img src={temp} alt="" id="temp" />
-                <p>{weatherData.temperature}°C</p>
-                <img src={weatherData.icon} alt="" id="temp-img" />
-              </div>
-              <p id="date">{formattedDate}</p>
-            </div>
-            <div className="twoo">
-              <div className="twoone">
-                <p className="too">HUMIDITY</p>
-                <p className="tooo">{weatherData.humidity}% </p>
-              </div>
-              <div className="twoone">
-                <p className="too">WIND SPEED</p>
-                <p className="tooo">{weatherData.windSpeed}mph</p>
-              </div>
-              <div className="twoone">
-                <p className="too">VISIBILITY</p>
-                <p className="tooo">{weatherData.visibility}</p>
-              </div>
-            </div>
-          </>
-        )}
-      </div>
-      <div>
-        {forecast && (
-        <div id="z">
-         {[0, 1, 2, 3, 4, 5, 6].map((i) => (
-          <div className="petit" key={i}>
-              <p className="time">{forecast[`time${i}`]}</p>
-              <img src={forecast[`icon${i}`]} alt="weather icon" className="weather-icon" />
-              <p className="tps">{forecast[`temperature${i}`]}°C</p>
-              </div>
-              ))}
-           </div>
-         )}
-      </div>
-      <div id="un">
-        {forecast && (
-          <>
-            <div id="loc">
-              <p>{weatherData.location} </p>
-              <img src={location} id="location" />
-            </div>
-            <div id="b">
-              <div className="two">
-                <img src={temp} alt="" id="temp" />
-                <p>{forecast[`temperature${13}`]}°C</p>
-                <img src={weatherData.icon} alt="" id="temp-img" />
-              </div>
-              <p id="date">{formattedTomorrow}</p>
-            </div>
-            <div className="twoo">
-              <div className="twoone">
-                <p className="too">HUMIDITY</p>
-                <p className="tooo">{forecast[`humidity${13}`]}% </p>
-              </div>
-              <div className="twoone">
-                <p className="too">WIND SPEED</p>
-                <p className="tooo">{forecast[`windSpeed${13}`]}mph</p>
-              </div>
-              <div className="twoone">
-                <p className="too">VISIBILITY</p>
-                <p className="tooo">{forecast[`visibility${13}`]}</p>
-              </div>
-            </div>
-          </>
-        )}
-      </div>
-      <div>
-        {forecast && (
-        <div id="z">
-         {[13, 14, 15, 16, 17, 18, 19].map((i) => (
-          <div className="petit" key={i}>
-              <p className="time">{forecast[`time${i}`]}</p>
-              <img src={forecast[`icon${i}`]} alt="weather icon" className="weather-icon" />
-              <p className="tps">{forecast[`temperature${i}`]}°C</p>
-              </div>
-              ))}
-           </div>
-         )}
+    <div className="weather-container">
+      <div className="search-container">
+        <input 
+          type="text" 
+          placeholder="Search location..." 
+          ref={inputRef} 
+          className="search-input" 
+        />
+        <img 
+          src={Search} 
+          onClick={() => search(inputRef.current.value)} 
+          className="search-icon" 
+          alt="Search"
+        />
       </div>
       
+      <div id="current-weather">
+        {weatherData && (
+          <>
+            <div className="location-container">
+              <p className="location-name">{weatherData.location}</p>
+              <img src={location} className="location-icon" alt="Location" />
+            </div>
+            <div className="weather-main">
+              <div className="temperature-container">
+                <img src={temp} alt="Temperature" className="temperature-icon" />
+                <p className="temperature-value">{weatherData.temperature}°C</p>
+                <img src={weatherData.icon} alt="Weather" className="weather-icon-large" />
+              </div>
+              <p className="current-date">{formattedDate}</p>
+            </div>
+            <div className="weather-details">
+              <div className="weather-detail">
+                <p className="detail-label">HUMIDITY</p>
+                <p className="detail-value">{weatherData.humidity}%</p>
+              </div>
+              <div className="weather-detail">
+                <p className="detail-label">WIND SPEED</p>
+                <p className="detail-value">{weatherData.windSpeed}mph</p>
+              </div>
+              <div className="weather-detail">
+                <p className="detail-label">VISIBILITY</p>
+                <p className="detail-value">{weatherData.visibility}</p>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+      
+      <div>
+        {forecast && (
+          <div className="hourly-forecast">
+            {[0, 1, 2, 3, 4, 5, 6].map((i) => (
+              <div className="forecast-item" key={i}>
+                <p className="forecast-time">{forecast[`time${i}`]}</p>
+                <img src={forecast[`icon${i}`]} alt="Weather" className="forecast-icon" />
+                <p className="forecast-temp">{forecast[`temperature${i}`]}°C</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+      
+      <div id="tomorrow-weather">
+        {forecast && (
+          <>
+            <div className="location-container">
+              <p className="location-name">{weatherData.location}</p>
+              <img src={location} className="location-icon" alt="Location" />
+            </div>
+            <div className="weather-main">
+              <div className="temperature-container">
+                <img src={temp} alt="Temperature" className="temperature-icon" />
+                <p className="temperature-value">{forecast[`temperature${13}`]}°C</p>
+                <img src={weatherData.icon} alt="Weather" className="weather-icon-large" />
+              </div>
+              <p className="current-date">{formattedTomorrow}</p>
+            </div>
+            <div className="weather-details">
+              <div className="weather-detail">
+                <p className="detail-label">HUMIDITY</p>
+                <p className="detail-value">{forecast[`humidity${13}`]}%</p>
+              </div>
+              <div className="weather-detail">
+                <p className="detail-label">WIND SPEED</p>
+                <p className="detail-value">{forecast[`windSpeed${13}`]}mph</p>
+              </div>
+              <div className="weather-detail">
+                <p className="detail-label">VISIBILITY</p>
+                <p className="detail-value">{forecast[`visibility${13}`]}</p>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+      
+      <div>
+        {forecast && (
+          <div className="hourly-forecast">
+            {[13, 14, 15, 16, 17, 18, 19].map((i) => (
+              <div className="forecast-item" key={i}>
+                <p className="forecast-time">{forecast[`time${i}`]}</p>
+                <img src={forecast[`icon${i}`]} alt="Weather" className="forecast-icon" />
+                <p className="forecast-temp">{forecast[`temperature${i}`]}°C</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
+
 export default Weather;
