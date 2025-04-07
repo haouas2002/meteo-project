@@ -13,7 +13,8 @@
 }
 
 .search-input {
-  width: 711px;
+  width: 100%;
+  max-width: 711px;
   height: 66px;
   padding: 10px 20px;
   border: none;
@@ -50,6 +51,9 @@
   box-shadow: 10px 5px 5px #00000033;
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 #current-weather:hover, #tomorrow-weather:hover {
@@ -169,4 +173,82 @@
 
 .forecast-temp {
   margin: 0;
+}
+
+
+@media (max-width: 1200px) {
+  .weather-container {
+    margin: 100px auto;
+  }
+  .search-input {
+    width: 80%;
+  }
+  .search-container{
+    margin-top: 200px;
+    margin-left: 5px;
+  }
+  #current-weather, #tomorrow-weather {
+    max-width: 90%;
+  }
+  .temperature-container {
+    font-size: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .weather-container {
+    margin: 50px auto;
+  }
+  .search-input {
+    width: 100%;
+    font-size: 26px;
+  }
+  .search-container{
+    margin-top: 200px;
+    margin-left: 5px;
+  }
+  #current-weather, #tomorrow-weather {
+    max-width: 95%;
+    padding: 15px;
+  }
+  .temperature-container {
+    font-size: 45px;
+  }
+  .weather-details {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .forecast-item {
+    width: 100px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .weather-container {
+    margin: 20px auto;
+  }
+  .search-input {
+    width: 90%;
+    font-size: 22px;
+  }
+  .search-container{
+    margin-top: 200px;
+    margin-left: 5px;
+  }
+  #current-weather, #tomorrow-weather {
+    max-width: 90%;
+    padding: 10px;
+  }
+  .temperature-container {
+    font-size: 40px;
+  }
+  .weather-details {
+    flex-direction: row;
+    gap: 10px;
+  }
+  .forecast-item {
+    width: 80px;
+    padding: 6px;
+  }
 }
