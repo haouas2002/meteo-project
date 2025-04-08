@@ -43,3 +43,16 @@ body {
   background-size: 200% 200%;
   animation: gradientAnimation 10s ease infinite;
 }
+
+/* Media Queries pour Responsivité */
+@media (max-width: 768px) {
+  body {
+    background-size: 150% 150%;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    background-size: 100% 100%;
+  }
+}
