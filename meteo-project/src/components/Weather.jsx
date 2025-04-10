@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef ,useEffect  } from "react";
 import clear_sky from "../assets/images/clearSky.png";
 import few_clouds from "../assets/images/fewClouds.png";
 import scattered_clouds from "../assets/images/scatteredClouds.png";
@@ -101,6 +101,10 @@ function Weather() {
       console.error(error.message);
     }
   };
+  useEffect(() => {
+    search("tunisia");
+  }, []);
+  
 
   const today = new Date();
   const options = { weekday: "short", month: "short", day: "numeric" };
